@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loan Status</title>
+
+    <script type="text/javascript">
+        function make_json(form)
+        {
+            var json = {
+                "Gender": form.Gender.value,
+                "Married": form.Married.value,
+                "Dependents": form.Dependents.value,
+                "Education": form.Education.value,
+                "Self_Employed": form.Self_Employed.value,
+                "ApplicantIncome" : form.ApplicantIncome.value,
+                "CoapplicantIncome": form.CoapplicantIncome.value,
+                "LoanAmount": form.LoanAmount.value,
+                "Loan_Amount_Term" : form.Loan_Amount_Term.value,
+                "Credit_History": form.Credit_History.value,
+                "Property_Area": form.Property_Area.value
+
+            };
+            var html3 = JSON.stringify(json);
+
+
+            var xhr = new XMLHttpRequest();
+            var url = "http://127.0.0.1:9000/api";
+            xhr.open("POST", url, true);
+
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var json = JSON.parse(xhr.responseText);
+                    document.getElementById('out').innerHTML = json;
+                    alert(json);
+                    console.log(json.results);
+                }
+            };
+            xhr.send(html3);
+
+        }
+    </script>
+
+
+
+</head>
+
+
+<body>
+<form onsubmit="return make_json(this);" method="post">
+    Gender:   <input list = "g1" name="Gender">
+    <datalist id="g1">
+        <option value="Male">
+        <option value="Female">
+    </datalist>
+    <br>
+    Married: <input list = "g2" name="Married">
+    <datalist id="g2">
+        <option value="Yes">
+        <option value="No">
+    </datalist><br>
+
+    Dependents: <input list = "g3" name="Dependents">
+    <datalist id="g3">
+         <option value="0">
+        <option value="1">
+        <option value="2">
+        <option value="3+">
+    </datalist><br>
+
+    Education: <input list = "g4" name="Education">
+    <datalist id="g4">
+        <option value="Graduate">
+        <option value="Not Graduate">
+    </datalist><br>
+
+    Self Employed: <input list = "g5" name="Self_Employed">
+    <datalist id="g5">
+        <option value="Yes">
+        <option value="No">
+    </datalist><br>
+
+    Applicant Income: <input type="text" name="ApplicantIncome"><br>
+    Co - Applicant Income: <input type="text" name="CoapplicantIncome"><br>
+    Loan Amount Term: <input type="text" name="Loan_Amount_Term"><br>
+    Loan Amount: <input type="text" name="LoanAmount"><br>
+
+    Credit History: <input list = "g6" name="Credit_History">
+    <datalist id="g6">
+        <option value="0">
+        <option value="1">
+        <option value="2">
+    </datalist><br>
+
+    Property Area: <input list = "g7" name="Property_Area">
+    <datalist id="g7">
+        <option value="Rural">
+        <option value="Semiurban">
+        <option value="Urban">
+    </datalist>
+
+
+    <br>
+    <br>
+    <br>
+    <input type="submit" value="Submit" >
+</form>
+    <br>    <br>
+<pre id = "out">Fiil the above form</pre>
+
+
+
+
+</body>
+
+</html>
