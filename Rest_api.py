@@ -5,7 +5,7 @@ import pandas as pd
 import json,requests
 from pandas.io.json import json_normalize
 
-random_forest = pk.load(open("C:/Users/rahul/Downloads/classifier.pkl","rb"))
+random_forest = pk.load(open("classifier1.pkl","rb"))
 
 app = Flask(__name__)
 
