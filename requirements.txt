@@ -1,5 +1,2 @@
 flask
-pickle
-numpy
-pandas
 uwsgi
